@@ -5,15 +5,14 @@ import styled from "styled-components";
 import Banner from "./components/Banner";
 import Carousel from "./components/Carousel";
 
-import data from "./data/data";
+import data from "./data/datav2";
 import { colors } from "./data/styles";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      banners: data.banners,
-      carousels: data.carousels,
+      data: data,
       page: 1,
       redirect: true
     };
@@ -59,64 +58,24 @@ class App extends React.Component {
     return (
       <StyledApp className="App">
         <Switch>
-          <Route
-            path="/1"
-            render={() => {
-              return <Banner content={this.state.banners.mainBanner} />;
-            }}
-          />
-
-          <Route
-            path="/2"
-            render={() => {
-              return <Banner content={this.state.banners.lifegiver} />;
-            }}
-          />
-
-          <Route
-            path="/3"
-            render={() => {
-              return <Carousel content={this.state.carousels.selfies} />;
-            }}
-          />
-
-          <Route
-            path="/4"
-            render={() => {
-              return <Carousel content={this.state.carousels.loved} />;
-            }}
-          />
-
-          <Route
-            path="/5"
-            render={() => {
-              return <Carousel content={this.state.carousels.baking} />;
-            }}
-          />
-
-          <Route
-            path="/6"
-            render={() => {
-              return <Carousel content={this.state.carousels.spirit} />;
-            }}
-          />
-
-          <Route
-            path="/7"
-            render={() => {
-              return <Banner content={this.state.banners.love} />;
-            }}
-          />
-
-          <Route
-            path="/8"
-            render={() => {
-              return <Banner content={this.state.banners.end} />;
-            }}
-          />
+          {this.state.data.map((item, i) => {
+            return item.type === "banner" ? (
+              <Route path={`/${i + 1}`}>
+                <Banner content={item} />
+              </Route>
+            ) : item.type === "carousel" ? (
+              <Route path={`/${i + 1}`}>
+                <Carousel content={item} />
+              </Route>
+            ) : null;
+          })}
         </Switch>
-        <span className="left" onClick={this.prev}>&lt;</span>
-        <span className="right" onClick={this.next}>&gt;</span>
+        <span className="left" onClick={this.prev}>
+          &lt;
+        </span>
+        <span className="right" onClick={this.next}>
+          &gt;
+        </span>
       </StyledApp>
     );
   }
@@ -132,7 +91,7 @@ const StyledApp = styled.div`
     bottom: 4px;
     background: none;
     color: ${colors.mainlight};
-    opacity: .3;
+    opacity: 0.3;
     font-weight: 700;
     font-size: 3em;
     cursor: pointer;
