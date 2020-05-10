@@ -19,7 +19,7 @@ class Carousel extends React.Component {
     });
     this.timer = setInterval(() => {
       this.setState({ curIndex: this.state.next });
-    }, 4000);
+    }, 2500);
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.curIndex !== this.state.curIndex) {
@@ -58,14 +58,19 @@ const StyledCarousel = styled.section`
   height: 100vh;
   &.reversed {
     flex-direction: row-reverse;
+    background-color: ${colors.mainDark};
+    color: ${colors.mainlight};
+    .carousel > .Card > img {
+      box-shadow: 0 0 40px 2px ${colors.mainMed};
+    }
   }
   p {
     font-family: "Ubuntu", sans-serif;
+    text-align: center;
+    font-weight: 700;
     font-size: 3rem;
     width: 50%;
     padding: 10vh 3%;
-    text-align: center;
-    font-weight: 700;
   }
   .carousel {
     height: 100vh;
