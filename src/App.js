@@ -27,6 +27,7 @@ class App extends React.Component {
     }
   }
   componentWillUnmount() {
+    this.setState({ redirect: true });
     document.removeEventListener("keydown", this.handleKey);
   }
   handleKey = (e) => {
