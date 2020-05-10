@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Card from "./Card";
-import { colors } from "../data/styles";
+import { colors, mobile } from "../data/styles";
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -71,6 +71,9 @@ const StyledCarousel = styled.section`
     font-size: 3rem;
     width: 50%;
     padding: 10vh 3%;
+    @media ${mobile} {
+      font-size: 1.6rem;
+    }
   }
   .carousel {
     height: 100vh;

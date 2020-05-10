@@ -6,5 +6,6 @@ const colors = {
   grey: "#616161",
   beige: "#b9a793"
 };
+const mobile = "screen and (max-width: 800px) and (orientation: landscape)";
 
-export { colors };
+export { colors, mobile };
