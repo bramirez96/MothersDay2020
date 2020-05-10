@@ -31,8 +31,9 @@ const StyledBanner = styled.section`
   }
   p {
     font-family: "Ubuntu", sans-serif;
-    font-size: 1.5rem;
-    font-weight: 300;
+    text-align: center;
+    font-weight: 700;
+    font-size: 3rem;
   }
   img {
     margin-top: 5vh;

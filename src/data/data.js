@@ -1,21 +1,25 @@
 const data = {
   banners: {
     mainBanner: {
+      type: "banner",
       main: true,
       title: "Mom...",
       pic: require("../images/weloveyou/thefam.jpg")
     },
     lifegiver: {
+      type: "banner",
       main: false,
       text: "Today is a very special day...",
       pic: require("../images/crumbscomic.jpg")
     },
     love: {
+      type: "banner",
       main: false,
       text: "You bring joy to everyone around you.",
       pic: require("../images/fullfamily.jpg")
     },
     end: {
+      type: "banner",
       main: true,
       title: "Happy Mother's Day!",
       pic: require("../images/weloveyou/irene2.jpg")
@@ -23,6 +27,7 @@ const data = {
   },
   carousels: {
     selfies: {
+      type: "carousel",
       text: "You've been such a bright light in my life...",
       reversed: false,
       images: [
@@ -35,7 +40,8 @@ const data = {
       ]
     },
     loved: {
-      text: "As well as the lives of so many others...",
+      type: "carousel",
+      text: "As well as the lives of so many others.",
       reversed: true,
       images: [
         require("../images/weloveyou/jessicaandthekids02.jpg"),
@@ -51,6 +57,7 @@ const data = {
       ]
     },
     baking: {
+      type: "carousel",
       text: "Whether it's with your delicious baking...",
       reversed: false,
       images: [
@@ -62,6 +69,7 @@ const data = {
       ]
     },
     spirit: {
+      type: "carousel",
       text: "Or your loving spirit...",
       reversed: true,
       images: [
