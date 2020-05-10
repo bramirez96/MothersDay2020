@@ -45,7 +45,7 @@ class App extends React.Component {
     }
   };
   next = () => {
-    if (this.state.page < 8) {
+    if (this.state.page < this.state.data.length) {
       this.setState({ page: this.state.page + 1 });
     }
   };
