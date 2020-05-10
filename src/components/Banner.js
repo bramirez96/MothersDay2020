@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../data/styles";
+import { colors, mobile } from "../data/styles";
 
 const Banner = (props) => {
   const { main, text, title, pic } = props.content;
@@ -28,12 +28,18 @@ const StyledBanner = styled.section`
   h2 {
     font-family: "Great Vibes", cursive;
     font-size: 6em;
+    @media ${mobile} {
+      font-size: 2em;
+    }
   }
   p {
     font-family: "Ubuntu", sans-serif;
     text-align: center;
     font-weight: 700;
     font-size: 3rem;
+    @media ${mobile} {
+      font-size: 1.6rem;
+    }
   }
   img {
     margin-top: 5vh;
