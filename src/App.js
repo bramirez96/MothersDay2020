@@ -88,6 +88,7 @@ const StyledApp = styled.div`
   flex-flow: column nowrap;
   position: relative;
   span {
+    font-family: "Ubuntu", sans-serif;
     position: absolute;
     bottom: 4px;
     background: none;
