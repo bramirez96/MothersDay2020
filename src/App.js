@@ -1,65 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 import styled from "styled-components";
+
+import { setRedirect, setPage } from "./actions/actions";
 
 import Banner from "./components/Banner";
 import Carousel from "./components/Carousel";
 
-import data from "./data/datav2";
 import { colors } from "./data/styles";
 
-class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      data: data,
-      page: 1,
-      redirect: true
-    };
-  }
-  componentDidMount() {
-    document.addEventListener("keydown", this.handleKey);
-    this.setState({ redirect: false });
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.page !== this.state.page) {
-      this.setState({ redirect: true });
-    }
-  }
-  componentWillUnmount() {
-    this.setState({ redirect: true });
-    document.removeEventListener("keydown", this.handleKey);
-  }
-  handleKey = (e) => {
+const App = (props) => {
+  const { setPage, setRedirect, page, data, redirect } = props;
+  const prev = () => {
+    setPage("PREV");
+  };
+  const next = () => {
+    setPage("NEXT");
+  };
+  const handleKey = (e) => {
     e.preventDefault();
     const { key } = e;
     if (key === "ArrowRight") {
-      this.next();
+      next();
     }
     if (key === "ArrowLeft") {
-      this.prev();
+      prev();
     }
   };
-  prev = () => {
-    if (this.state.page > 1) {
-      this.setState({ page: this.state.page - 1 });
-    }
-  };
-  next = () => {
-    if (this.state.page < this.state.data.length) {
-      this.setState({ page: this.state.page + 1 });
-    }
-  };
+  useEffect(() => {
+    document.addEventListener("keydown", handleKey);
+    setRedirect(false);
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      setRedirect(true);
+    };
+  }, []);
 
-  render() {
-    if (this.state.redirect) {
-      this.setState({ redirect: false });
-      return <Redirect to={`/${this.state.page}`} />;
-    }
+  if (redirect) {
+    setRedirect(false);
+    return <Redirect to={`/${page}`} />;
+  } else {
     return (
       <StyledApp className="App">
         <Switch>
-          {this.state.data.map((item, i) => {
+          {data.map((item, i) => {
             return item.type === "banner" ? (
               <Route path={`/${i + 1}`}>
                 <Banner content={item} />
@@ -71,16 +56,16 @@ class App extends React.Component {
             ) : null;
           })}
         </Switch>
-        <span className="left" onClick={this.prev}>
+        <span className="left" onClick={prev}>
           &lt;
         </span>
-        <span className="right" onClick={this.next}>
+        <span className="right" onClick={next}>
           &gt;
         </span>
       </StyledApp>
     );
   }
-}
+};
 
 const StyledApp = styled.div`
   background-color: black;
@@ -106,4 +91,9 @@ const StyledApp = styled.div`
   }
 `;
 
-export default App;
+const mapStateToProps = (state) => {
+  const { data, page, redirect } = state;
+  return { data, page, redirect };
+};
+
+export default connect(mapStateToProps, { setRedirect, setPage })(App);
